@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Opportunity Finder — MVP QA v2</title>
+<style>
+:root{--bg:#f4f7fb;--card:#fff;--ink:#132238;--muted:#637083;--line:#dbe3ec;--navy:#17365d;--soft:#eaf2f9;--warn:#fff7df;--good:#eaf6ee}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.45}
+.wrap{max-width:900px;margin:auto;padding:28px 18px 64px}.hero,.card,.results{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 22px rgba(16,37,63,.05)}
+.hero,.card{padding:24px;margin-bottom:14px}.hero h1{margin:0 0 8px;font-size:32px}.lead{color:var(--muted);font-size:17px}.small{font-size:13px;color:var(--muted)}
+.q{font-size:12px;font-weight:800;color:#245c91;text-transform:uppercase;letter-spacing:.08em}h2{font-size:21px;margin:4px 0 12px}h3{margin:0 0 6px}
+.option{display:flex;gap:10px;padding:10px 11px;border:1px solid var(--line);border-radius:10px;margin:7px 0;background:white}
+select{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;background:white;font-size:15px}
+button{border:0;border-radius:10px;padding:12px 18px;font-weight:800;cursor:pointer}.primary{background:var(--navy);color:white}.secondary{background:var(--soft);color:var(--navy)}
+.actions{display:flex;gap:10px;flex-wrap:wrap}.error{display:none;color:#9b1c1c;font-weight:700;margin-top:10px}
+.results{display:none;overflow:hidden;margin-top:18px}.results-head{background:var(--navy);color:white;padding:22px}.results-body{padding:22px}
+.opp{border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0}.opp.primary{border:2px solid #9ab9d7;background:#fbfdff}.tag{display:inline-block;padding:4px 8px;border-radius:999px;background:var(--soft);font-size:12px;font-weight:800;color:var(--navy);margin-bottom:8px}
+.meta{display:flex;gap:8px;flex-wrap:wrap}.pill{background:#f0f4f8;padding:4px 8px;border-radius:999px;font-size:12px;color:#425169}.notice{padding:12px 14px;border-radius:10px;background:#f8fafc;border:1px solid var(--line);margin:12px 0}.risk{background:var(--warn);border-color:#ead9a4}.cta{background:var(--good);border:1px solid #c9e5d2;border-radius:14px;padding:18px;margin-top:18px}
+.banner{background:var(--warn);border:1px solid #ead9a4;padding:10px 14px;border-radius:10px;font-size:13px;margin-bottom:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="banner"><strong>Development QA prototype.</strong> Runs locally only; no data is sent or stored.</div>
+<section class="hero">
+<h1>Find the AI opportunities actually worth considering in your business</h1>
+<p class="lead">Tell us where time is being lost and which tools you already use. In about 3 minutes, you’ll see the practical opportunities worth investigating first.</p>
+<p class="small"><strong>Please do not enter confidential, sensitive, health, financial, employee or customer information.</strong></p>
+</section>
+
+<form id="f">
+<div class="card"><div class="q">Question 1</div><h2>What best describes your business?</h2><select id="industry" required><option value="">Select one</option><option>Professional services</option><option>Trades / home services</option><option>Retail / ecommerce</option><option>Hospitality / food</option><option>Events / creative</option><option>Property / real estate</option><option>Health / wellbeing</option><option>Financial / accounting</option><option>Legal</option><option>Education / training</option><option>Manufacturing / logistics</option><option>Other</option></select></div>
+<div class="card"><div class="q">Question 2</div><h2>How many people work in the business?</h2><select id="size" required><option value="">Select one</option><option>Just me</option><option>2–5</option><option>6–20</option><option>21–50</option><option>51+</option></select></div>
+<div class="card"><div class="q">Question 3</div><h2>How are you currently using AI at work?</h2><div id="ai"></div></div>
+<div class="card"><div class="q">Question 4</div><h2>Which tools are already central to your business?</h2><div id="stack"></div></div>
+<div class="card"><div class="q">Question 5</div><h2>Which areas take more time than they should?</h2><p class="small">Choose up to 3.</p><div id="pain"></div><div id="limit" class="error">Choose no more than 3 areas.</div></div>
+<div class="card"><div class="q">Question 6</div><h2>Of those areas, which ONE should be improved first?</h2><select id="priority" required><option value="">Choose your time-consuming areas above first</option></select></div>
+<div class="card"><div class="q">Question 7</div><h2>How often does the repetitive work in that priority area occur?</h2><div id="freq"></div></div>
+<div class="card"><div class="q">Question 8</div><h2>What is stopping you from improving it today?</h2><div id="barrier"></div></div>
+<div class="card"><div class="q">Question 9</div><h2>What kind of help would be most useful?</h2><div id="help"></div></div>
+<div class="card"><div class="q">Question 10</div><h2>If something genuinely useful solved this problem, what would you be comfortable spending to get started?</h2><div id="spend"></div></div>
+<div class="actions"><button class="primary" type="submit">Show my opportunities</button><button class="secondary" type="button" id="reset">Reset</button></div><div id="err" class="error">Please complete all required questions.</div>
+</form>
+
+<section id="results" class="results"><div class="results-head"><h2>Your practical AI opportunities</h2><p>Your own first priority is shown first. Other selected areas are shown as secondary opportunities.</p></div><div class="results-body"><div id="cards"></div><div id="notes"></div><div class="cta"><h3>Want the exact setup?</h3><p>Get a personalised <strong>AI Quick-Start Pack</strong> for your #1 opportunity — validation price <strong>A$39</strong>.</p><p class="small">Tool route, setup steps, five tailored prompts/templates/checklists, human-review points, 7-day action plan and troubleshooting guidance.</p><button class="primary" type="button" onclick="alert('Prototype only — live version will open Stripe checkout.')">Get my A$39 Quick-Start Pack</button></div><p class="small" style="margin-top:18px">These recommendations are general information based on your survey answers. AI and software tools can produce inaccurate results and may not suit every business or regulated use. Review outputs before relying on them and obtain professional advice where appropriate. Third-party product features and pricing can change.</p></div></section>
+</div>
+
+<script>
+const defs={
+"Email / admin":["Reduce repetitive email and admin drafting","Free with existing tools to low monthly","Easy","List the five messages or admin outputs you recreate most often and create an approved template for each."],
+"Customer enquiries & follow-up":["Respond to customer enquiries more consistently","Free to low monthly","Easy–Medium","Collect the ten most common enquiry types and create an approved response or qualification checklist for each."],
+"Marketing / content":["Create a repeatable content workflow","Free to low monthly","Easy","Create one reusable content brief covering audience, offer, tone, source material and required formats."],
+"Quotes / proposals":["Standardise quote and proposal drafting","Mostly existing tools","Easy","Create one approved quote structure with fixed sections for scope, inclusions, exclusions, price, expiry and next step."],
+"Meetings / notes":["Turn meetings into clear actions","Existing plan or low monthly","Easy–Medium","Use one standard action format: decision, owner, due date and unresolved question."],
+"Forms / data entry":["Reduce repetitive forms, data entry and hand-offs","Free to low monthly","Medium","Write down one repeated hand-off from one system to another and document the trigger, fields and destination."],
+"Scheduling":["Reduce scheduling back-and-forth","Free to low monthly","Easy","Choose one appointment type and define availability, duration, buffer and information required before booking."],
+"Reporting / analysis":["Create a repeatable reporting and summary process","Mostly existing tools","Medium","Create one recurring report template with fixed source fields and a human-approved summary structure."],
+"Online orders / ecommerce admin":["Reduce routine ecommerce administration","Existing platform first","Medium","List the three post-order actions you repeat most and check whether your platform already supports a native rule, template or workflow for each."],
+"Document / knowledge work":["Make documents and internal knowledge easier to reuse","Mostly existing tools","Easy–Medium","Choose one recurring process and consolidate its SOP, template and reference material into one controlled location."]
+};
+const ai=["Not at all","Tried it a few times","Use it for a few tasks each week","Use it most days","AI is already built into several workflows"];
+const stacks=["Google Workspace","Microsoft 365","Xero / MYOB","CRM","Shopify / ecommerce platform","Job management / field service software","Project / task management","Canva / creative tools","None of these","Other"];
+const pains=[...Object.keys(defs),"Other"];
+const freq=["Several times a day","About daily","Several times a week","Weekly","Less often"];
+const barriers=["I don't know which tool to use","I don't know how to set it up","I've tried AI but the results weren't useful","My systems don't connect","My information is scattered","I don't have time to work it out","Staff / process change is the issue","Other"];
+const help=["Just tell me what tools are worth considering","Give me a step-by-step guide","Give me ready-made prompts / templates / checklists","Give me a personalised implementation pack","Set it up for me","Not sure yet"];
+const spend=["Free only","Under A$25","A$25–49","A$50–99","A$100–249","A$250+","Not sure"];
+
+function radio(id,name,arr){document.getElementById(id).innerHTML=arr.map(x=>`<label class="option"><input type="radio" name="${name}" value="${x}"><span>${x}</span></label>`).join("")}
+function checks(id,name,arr){document.getElementById(id).innerHTML=arr.map(x=>`<label class="option"><input type="checkbox" name="${name}" value="${x}"><span>${x}</span></label>`).join("")}
+function one(n){const e=document.querySelector(`input[name="${n}"]:checked`);return e?e.value:""}
+function many(n){return[...document.querySelectorAll(`input[name="${n}"]:checked`)].map(e=>e.value)}
+radio("ai","ai",ai);checks("stack","stack",stacks);checks("pain","pain",pains);radio("freq","freq",freq);radio("barrier","barrier",barriers);radio("help","help",help);radio("spend","spend",spend);
+
+document.querySelectorAll('input[name="pain"]').forEach(e=>e.addEventListener("change",ev=>{
+ const vals=many("pain"); if(vals.length>3){ev.target.checked=false;document.getElementById("limit").style.display="block";setTimeout(()=>document.getElementById("limit").style.display="none",1400)}
+ const keep=many("pain").filter(x=>x!=="Other"), s=document.getElementById("priority"), old=s.value;
+ s.innerHTML='<option value="">Select one</option>'+keep.map(x=>`<option>${x}</option>`).join(""); if(keep.includes(old))s.value=old;
+}));
+
+function route(p){
+ const st=many("stack"), industry=document.getElementById("industry").value;
+ let r="";
+ if(p==="Marketing / content"&&st.includes("Canva / creative tools")) r="Use Canva plus your existing productivity suite before buying another content platform.";
+ else if(p==="Online orders / ecommerce admin"&&st.includes("Shopify / ecommerce platform")) r="Check what Shopify or your existing ecommerce platform can already automate before adding another app.";
+ else if(st.includes("Microsoft 365")) r="Investigate Microsoft-native capabilities before adding another subscription.";
+ else if(st.includes("Google Workspace")) r="Investigate Google-native capabilities before adding another subscription.";
+ else if(p==="Scheduling") r="Start with a standard booking or calendar feature before any complex AI system.";
+ else r="Start with a low-cost capability in your existing software or a general AI assistant before adding a specialised subscription.";
+ if(["Health / wellbeing","Financial / accounting","Legal"].includes(industry)) r+=" Keep the first use case administrative and low-risk; avoid sensitive client information in public generative-AI tools.";
+ return r;
+}
+function card(p,primary){
+ const d=defs[p]; const f=one("freq");
+ return `<div class="opp ${primary?"primary":""}"><span class="tag">${primary?"Your #1 priority":"Also worth considering"}</span><h3>${d[0]}</h3><p>${primary?`You chose ${p.toLowerCase()} as the area to improve first${f?`, and said the work occurs ${f.toLowerCase()}`:""}.`:`You also selected ${p.toLowerCase()} as an area taking more time than it should.`}</p><div class="meta"><span class="pill">${d[1]}</span><span class="pill">${d[2]}</span></div><p><strong>Recommended route:</strong> ${route(p)}</p><p><strong>First safe step:</strong> ${d[3]}</p></div>`;
+}
+function valid(){return document.getElementById("industry").value&&document.getElementById("size").value&&one("ai")&&many("stack").length&&many("pain").length&&document.getElementById("priority").value&&one("freq")&&one("barrier")&&one("help")&&one("spend")}
+
+document.getElementById("f").addEventListener("submit",e=>{
+ e.preventDefault(); if(!valid()){document.getElementById("err").style.display="block";return}
+ document.getElementById("err").style.display="none";
+ const p=document.getElementById("priority").value, ps=many("pain").filter(x=>x!=="Other"), second=ps.filter(x=>x!==p);
+ document.getElementById("cards").innerHTML=card(p,true)+second.map(x=>card(x,false)).join("");
+ let notes="",b=one("barrier"),ind=document.getElementById("industry").value;
+ if(b==="My systems don't connect")notes+=`<div class="notice"><strong>Barrier note:</strong> Define the hand-off clearly before choosing an automation platform.</div>`;
+ if(b==="My information is scattered")notes+=`<div class="notice"><strong>Barrier note:</strong> Fixing where information lives may create more value than adding another AI tool.</div>`;
+ if(b==="I've tried AI but the results weren't useful")notes+=`<div class="notice"><strong>Barrier note:</strong> Your main opportunity may be better instructions, context and review rather than another AI product.</div>`;
+ if(["Health / wellbeing","Financial / accounting","Legal"].includes(ind))notes+=`<div class="notice risk"><strong>Extra caution for your industry:</strong> Keep recommendations focused on low-risk administrative/productivity uses. Do not place sensitive client information into public generative-AI tools or automate professional, diagnostic, legal, financial, eligibility or other consequential decisions without appropriate specialist controls.</div>`;
+ document.getElementById("notes").innerHTML=notes;document.getElementById("results").style.display="block";document.getElementById("results").scrollIntoView({behavior:"smooth"});
+});
+document.getElementById("reset").addEventListener("click",()=>{document.getElementById("f").reset();document.getElementById("priority").innerHTML='<option value="">Choose your time-consuming areas above first</option>';document.getElementById("results").style.display="none";window.scrollTo({top:0,behavior:"smooth"})});
+</script>
+</body></html>
