@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Personalised AI Quick-Start Implementation Kit — Customer Example</title>
+<style>
+:root{--ink:#102033;--muted:#607086;--line:#d9e2ec;--accent:#2563eb;--soft:#f4f7fb;--navy:#0f1d31;--green:#0f766e;--amber:#a16207}
+*{box-sizing:border-box}
+body{margin:0;background:#e9eef5;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);line-height:1.55}
+.doc{max-width:980px;margin:30px auto;background:#fff;box-shadow:0 20px 60px rgba(15,29,49,.12)}
+.cover{padding:62px 64px;background:linear-gradient(145deg,#0f1d31,#17345c);color:white;min-height:500px;display:flex;flex-direction:column;justify-content:space-between}
+.kicker{font-size:12px;font-weight:900;letter-spacing:.14em;color:#93c5fd}
+.cover h1{font-size:48px;line-height:1.03;letter-spacing:-.045em;margin:14px 0 18px;max-width:780px}
+.cover p{font-size:19px;color:#dbeafe;max-width:720px}
+.meta{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:30px}
+.meta div{border:1px solid #315077;background:rgba(255,255,255,.04);border-radius:14px;padding:14px}
+.meta small{display:block;color:#9fb6d4;font-size:10px;letter-spacing:.08em;margin-bottom:4px}
+.meta b{font-size:14px}
+section{padding:48px 64px;border-bottom:1px solid var(--line)}
+h2{font-size:32px;letter-spacing:-.035em;margin:0 0 12px}
+h3{font-size:21px;margin:24px 0 10px}
+.lead{font-size:17px;color:var(--muted);max-width:800px}
+.callout{border:1px solid var(--line);border-radius:18px;padding:22px;background:var(--soft);margin-top:22px}
+.start{background:linear-gradient(135deg,#eff6ff,#fff);border-color:#bfdbfe}
+.stepgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:20px}
+.step{border:1px solid var(--line);border-radius:14px;padding:18px;position:relative;background:#fff}
+.step .n{width:30px;height:30px;display:grid;place-items:center;border-radius:10px;background:var(--accent);color:white;font-weight:900;margin-bottom:11px}
+.flow{display:flex;align-items:stretch;gap:8px;margin:22px 0;flex-wrap:wrap}
+.flow div{flex:1;min-width:135px;border:1px solid var(--line);border-radius:13px;padding:15px;text-align:center;background:#fff;font-weight:750}
+.flow span{align-self:center;color:#94a3b8;font-weight:900}
+.prompt{margin:14px 0;border:1px solid #cfd9e6;border-radius:16px;overflow:hidden;background:#fff}
+.prompt-head{display:flex;justify-content:space-between;gap:20px;background:#f8fafc;padding:13px 16px;border-bottom:1px solid #dfe6ee}
+.prompt-head b{font-size:14px}
+.prompt-head span{font-size:11px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+.prompt-body{padding:18px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;white-space:pre-wrap;background:#fbfdff}
+.check{background:#ecfdf5;border-left:4px solid var(--green);padding:15px 17px;border-radius:9px;margin:13px 0}
+.warn{background:#fffbeb;border-left:4px solid var(--amber);padding:15px 17px;border-radius:9px;margin:13px 0}
+.assets{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.asset{border:1px solid var(--line);border-radius:14px;padding:17px;background:#fff}
+.asset b{display:block;margin-bottom:5px}
+.day{display:grid;grid-template-columns:58px 1fr;gap:14px;align-items:start;padding:13px 0;border-bottom:1px solid #e8edf3}
+.day:last-child{border-bottom:0}
+.day strong{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:#0f1d31;color:#fff}
+table{width:100%;border-collapse:collapse;margin-top:14px}
+th,td{padding:12px;border-bottom:1px solid var(--line);text-align:left}
+th{background:#f8fafc;font-size:12px;color:#516173;letter-spacing:.04em}
+.pricebox{padding:28px;border-radius:20px;background:#0f1d31;color:#fff}
+.pricebox h2{color:#fff}
+.pricebox p{color:#cbd5e1}
+.footer{padding:28px 64px;color:#718096;font-size:12px}
+@media(max-width:720px){.doc{margin:0}.cover,section,.footer{padding:34px 22px}.cover h1{font-size:38px}.meta{grid-template-columns:1fr 1fr}.stepgrid,.assets{grid-template-columns:1fr}.flow{display:grid;grid-template-columns:1fr}.flow span{display:none}}
+</style>
+</head>
+<body>
+<div class="doc">
+<div class="cover">
+  <div>
+    <div class="kicker">PERSONALISED AI QUICK-START IMPLEMENTATION KIT</div>
+    <h1>Respond to customer enquiries faster — without giving up control.</h1>
+    <p>A practical implementation kit built around your business, your existing Microsoft 365 setup and the customer-enquiry problem you selected as your first priority.</p>
+  </div>
+  <div class="meta">
+    <div><small>BUSINESS</small><b>Solo trade-service business</b></div>
+    <div><small>PRIORITY</small><b>Customer enquiries</b></div>
+    <div><small>CURRENT STACK</small><b>Microsoft 365</b></div>
+    <div><small>IMPLEMENTATION LEVEL</small><b>Beginner-friendly</b></div>
+  </div>
+</div>
+
+<section>
+  <div class="kicker" style="color:var(--accent)">START HERE</div>
+  <h2>Your first 30 minutes</h2>
+  <p class="lead">Do these four things before buying another tool or trying to automate customer communication.</p>
+  <div class="stepgrid">
+    <div class="step"><div class="n">1</div><b>Collect five common enquiries</b><p>Use old, non-sensitive examples: quote request, availability, follow-up, reschedule and general question.</p></div>
+    <div class="step"><div class="n">2</div><b>Save the approved response structure</b><p>Greeting → answer what can be answered → identify missing information → clear next step.</p></div>
+    <div class="step"><div class="n">3</div><b>Paste the Business Context Prompt</b><p>Use the master context below before testing the first enquiry prompt.</p></div>
+    <div class="step"><div class="n">4</div><b>Time three test responses</b><p>Compare the time and amount of editing against how you normally reply.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Why this was selected</h2>
+  <p class="lead">You identified customer enquiries and follow-up as the first problem you want to improve, said the task happens frequently and already use Microsoft 365. That makes a controlled response workflow a sensible first experiment before adding another platform.</p>
+  <div class="callout">
+    <b>Recommended route</b>
+    <p><strong>Microsoft 365 + approved response templates + AI-assisted drafting where appropriate.</strong> No new software is required to test whether this creates value.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Your recommended workflow</h2>
+  <div class="flow">
+    <div>Incoming enquiry</div><span>→</span><div>Classify + identify missing info</div><span>→</span><div>Template or AI-assisted draft</div><span>→</span><div>Human check</div><span>→</span><div>Send</div>
+  </div>
+  <div class="warn"><b>Keep human approval for:</b> pricing, scope, timing, availability, complaints, unusual circumstances and anything that could create a commercial commitment.</div>
+</section>
+
+<section>
+  <h2>Your Business Context Prompt</h2>
+  <p class="lead">Paste this at the start of a new AI conversation before using the task prompts in this kit.</p>
+  <div class="prompt">
+    <div class="prompt-head"><b>Master context</b><span>Copy / paste</span></div>
+    <div class="prompt-body">I operate a small Australian trade-service business and I mainly use Microsoft 365.
+
+My current priority is responding to customer enquiries faster and more consistently.
+
+When helping me draft or analyse customer communications:
+- use only facts I provide;
+- never invent pricing, availability, scope, technical findings, timeframes or commitments;
+- if important information is missing, identify it rather than making an assumption;
+- keep customer-facing wording clear, practical and professional;
+- flag anything that requires my judgement before it is sent;
+- do not treat AI output as final approval.
+
+If the task involves sensitive, confidential or customer information, remind me to use an appropriate approved system rather than pasting it into a public AI tool.</div>
+  </div>
+</section>
+
+<section>
+  <h2>Your tailored prompt library</h2>
+  <p class="lead">Use these as working prompts, not as instructions to auto-send customer messages. Review every output before use.</p>
+
+  <div class="prompt"><div class="prompt-head"><b>1. Draft a new-enquiry reply</b><span>Start</span></div><div class="prompt-body">Using the business context above, draft a concise reply to the enquiry below.
+
+Objectives:
+1. Acknowledge the enquiry.
+2. Answer only what can be answered from the information supplied.
+3. Identify any missing information needed before the next step.
+4. End with one clear next action.
+
+Do not invent price, timing, availability, scope or technical conclusions.
+
+ENQUIRY:
+[PASTE NON-SENSITIVE ENQUIRY]</div></div>
+
+  <div class="prompt"><div class="prompt-head"><b>2. Find the missing information</b><span>Check</span></div><div class="prompt-body">Review this customer enquiry and list only the information I still need before I can decide the next step. Separate essential information from useful-but-optional information. Do not answer the customer's question yet.</div></div>
+
+  <div class="prompt"><div class="prompt-head"><b>3. Classify the enquiry</b><span>Organise</span></div><div class="prompt-body">Classify this enquiry as one of: new job, quote request, scheduling, existing-job follow-up, complaint/problem, general question or other. Explain the classification in one sentence and state what human decision is required next.</div></div>
+
+  <div class="prompt"><div class="prompt-head"><b>4. Make a reply shorter and clearer</b><span>Improve</span></div><div class="prompt-body">Rewrite this draft so it is shorter, clearer and easier for the customer to act on. Preserve every factual detail and do not add any new commitments or claims.</div></div>
+
+  <div class="prompt"><div class="prompt-head"><b>5. Check for invented facts</b><span>Quality control</span></div><div class="prompt-body">Compare this draft with the source information. List every statement that is not directly supported, is ambiguous, or appears to be an assumption. Do not rewrite until I approve the corrections.</div></div>
+
+  <div class="prompt"><div class="prompt-head"><b>6. Check commercial promises</b><span>Risk check</span></div><div class="prompt-body">Review this customer-facing draft and flag any wording that could be interpreted as a promise about price, timing, availability, job acceptance, scope, warranty, refund or outcome. Suggest safer wording without weakening confirmed facts.</div></div>
+
+  <div class="prompt"><div class="prompt-head"><b>7. Create a follow-up</b><span>Repeat</span></div><div class="prompt-body">Draft a short, polite follow-up for this enquiry. Make it easy for the customer to either continue or close the loop. Do not imply urgency or pressure unless I specifically provide it.</div></div>
+
+  <div class="prompt"><div class="prompt-head"><b>8. Turn repeated enquiries into FAQs</b><span>Systemise</span></div><div class="prompt-body">Review these anonymised historical enquiry examples. Identify recurring questions and group them into themes. Draft an FAQ only from information that appears consistently in the source material and flag anything requiring my confirmation.</div></div>
+
+  <div class="prompt"><div class="prompt-head"><b>9. Build a reusable response template</b><span>Systemise</span></div><div class="prompt-body">Using these three approved responses to the same type of enquiry, create one reusable template. Keep fixed wording separate from fields I need to customise each time.</div></div>
+
+  <div class="prompt"><div class="prompt-head"><b>10. Complaint acknowledgement</b><span>Human review required</span></div><div class="prompt-body">Draft a brief acknowledgement of this complaint. Confirm that the concern has been received and will be reviewed. Do not admit liability, promise an outcome, invent facts or speculate about cause. Highlight any part that needs my direct judgement before sending.</div></div>
+
+  <div class="prompt"><div class="prompt-head"><b>11. Internal handover summary</b><span>Organise</span></div><div class="prompt-body">Turn this customer thread into an internal handover containing: customer request, confirmed facts, missing information, actions already taken, next action and any commitment already made.</div></div>
+
+  <div class="prompt"><div class="prompt-head"><b>12. Improve the prompt when results are poor</b><span>Troubleshoot</span></div><div class="prompt-body">Review your previous answer. Identify where it became generic, made assumptions or failed to use the context I supplied. Ask me for any missing information needed to improve the result, then produce a revised version using only confirmed facts.</div></div>
+</section>
+
+<section>
+  <h2>Ready-to-use templates & checklists</h2>
+  <div class="assets">
+    <div class="asset"><b>New enquiry response</b><span>Acknowledge → collect missing information → next step.</span></div>
+    <div class="asset"><b>Missing-information checklist</b><span>Customer, location, issue, urgency, relevant photos/details, preferred next step.</span></div>
+    <div class="asset"><b>Quote follow-up</b><span>Short reusable follow-up without pressure or invented deadlines.</span></div>
+    <div class="asset"><b>Scheduling response</b><span>Confirmed availability only; no assumptions.</span></div>
+    <div class="asset"><b>Complaint acknowledgement</b><span>Receipt + review + next contact point, without admission or unsupported conclusions.</span></div>
+    <div class="asset"><b>Final-send QA</b><span>Facts, promises, missing information, tone, privacy and next action.</span></div>
+  </div>
+
+  <h3>Example: new enquiry template</h3>
+  <div class="callout">
+    <p>Thanks for getting in touch.</p>
+    <p>To help me understand the job, please send through the location, a brief description of the issue, when you first noticed it, whether it is urgent and any useful photos.</p>
+    <p>Once I have that information, I can review the appropriate next step.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Human-review rules</h2>
+  <div class="check"><b>Suitable for assisted drafting:</b> routine acknowledgements, missing-information requests, standard follow-ups, note summaries and approved FAQ/template work.</div>
+  <div class="warn"><b>Always review directly:</b> prices, scope, technical judgement, complaints, refunds, commitments, legal issues, safety issues, unusual circumstances, sensitive information and anything consequential for the customer.</div>
+</section>
+
+<section>
+  <h2>Your 7-day implementation plan</h2>
+  <div class="day"><strong>D1</strong><div><b>Collect examples.</b><br>Find 10–20 recent routine enquiries and identify the five most common types.</div></div>
+  <div class="day"><strong>D2</strong><div><b>Save templates.</b><br>Put the approved response structures somewhere easy to reach in your current Microsoft workflow.</div></div>
+  <div class="day"><strong>D3</strong><div><b>Test prompts.</b><br>Use old non-sensitive enquiries and test Prompts 1–6. Note where AI still needs correction.</div></div>
+  <div class="day"><strong>D4</strong><div><b>Tighten instructions.</b><br>Use the correction prompt to fix recurring problems rather than accepting inconsistent output.</div></div>
+  <div class="day"><strong>D5</strong><div><b>Use it on routine live work.</b><br>Keep every message under human review before sending.</div></div>
+  <div class="day"><strong>D6</strong><div><b>Measure.</b><br>Compare drafting time and editing effort against your old process.</div></div>
+  <div class="day"><strong>D7</strong><div><b>Decide.</b><br>Keep, change or stop the workflow based on evidence—not because it uses AI.</div></div>
+</section>
+
+<section>
+  <h2>Did this A$39 kit pay for itself?</h2>
+  <p class="lead">Use your own assumptions. This kit does not promise a financial return.</p>
+  <table>
+    <tr><th>YOUR TIME VALUE</th><th>TIME SAVED TO RECOVER A$39</th></tr>
+    <tr><td>A$50/hour</td><td>Approx. 47 minutes</td></tr>
+    <tr><td>A$75/hour</td><td>Approx. 31 minutes</td></tr>
+    <tr><td>A$100/hour</td><td>Approx. 23 minutes</td></tr>
+    <tr><td>A$150/hour</td><td>Approx. 16 minutes</td></tr>
+  </table>
+
+  <h3>Weekly test</h3>
+  <table>
+    <tr><th>Task</th><th>Before</th><th>After</th><th>Times/week</th><th>Weekly time released</th></tr>
+    <tr><td>Routine enquiry reply</td><td>___ min</td><td>___ min</td><td>___</td><td>___ min</td></tr>
+    <tr><td>Follow-up</td><td>___ min</td><td>___ min</td><td>___</td><td>___ min</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>What to consider next</h2>
+  <p class="lead">Your assessment also identified <strong>quotes/proposals</strong> and <strong>email/admin</strong> as areas worth considering later. Do not add them yet. First establish whether this customer-enquiry workflow produces a repeatable benefit.</p>
+</section>
+
+<section>
+  <div class="pricebox">
+    <div class="kicker">PRODUCT PRINCIPLE</div>
+    <h2>You are not paying for “AI advice”.</h2>
+    <p>You are paying for a practical starting system built around the business problem you selected: a workflow, copy/paste prompts, reusable assets, control points, a seven-day rollout and a way to decide whether it created enough value to keep.</p>
+  </div>
+</section>
+
+<div class="footer">
+Customer-example prototype for founder QA. Recommendations are general information and must be reviewed before use. Do not enter confidential, customer, health, financial or other sensitive information into a public AI tool unless appropriate privacy and data-handling arrangements have been verified. Third-party product features and terms can change.
+</div>
+</div>
+</body>
+</html>
