@@ -1,0 +1,5 @@
+{
+  "backend_url": "",
+  "mode": "founder-review",
+  "note": "Leave backend_url blank until the private controlled-fulfilment service is deployed and persistent storage is verified."
+}
