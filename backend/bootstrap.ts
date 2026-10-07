@@ -1,5 +1,11 @@
-const parts=[1,2,3,4,5].map(i=>Bun.env[`AOF_PACK_DATA_GZ_B64_${i}`]||"");
-const joined=parts.join("");
-if(joined) Bun.env.AOF_PACK_DATA_GZ_B64=joined;
-if(!Bun.env.AOF_PACK_DATA_GZ_B64) throw new Error("Private pack data is not configured");
+import { readFileSync } from "node:fs";
+import { createDecipheriv } from "node:crypto";
+const keyB64=Bun.env.AOF_PACK_KEY_B64||"";
+if(!keyB64) throw new Error("AOF_PACK_KEY_B64 is required");
+const joined=[1,2,3,4,5].map(i=>readFileSync(new URL(`./data/part${i}.txt`,import.meta.url),"utf8").trim()).join("");
+const blob=Buffer.from(joined,"base64");
+const nonce=blob.subarray(0,12), tag=blob.subarray(blob.length-16), ciphertext=blob.subarray(12,blob.length-16);
+const decipher=createDecipheriv("aes-256-gcm",Buffer.from(keyB64,"base64"),nonce);
+decipher.setAuthTag(tag);
+Bun.env.AOF_PACK_DATA_GZ_B64=Buffer.concat([decipher.update(ciphertext),decipher.final()]).toString("utf8");
 await import("./server.ts");
