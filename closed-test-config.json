@@ -1,5 +1,5 @@
 {
-  "backend_url": "",
-  "mode": "founder-review",
-  "note": "Leave backend_url blank until the private controlled-fulfilment service is deployed and persistent storage is verified."
+  "backend_url": "https://aof-controlled-fulfilment-production.up.railway.app",
+  "mode": "closed-test",
+  "note": "Private personalised fulfilment and stored five-question feedback are active for the closed market test."
 }
