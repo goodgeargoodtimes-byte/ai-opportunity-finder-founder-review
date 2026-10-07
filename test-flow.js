@@ -24,19 +24,19 @@
   if(tester)carry.set('tester',tester); if(reply)carry.set('reply',reply);
 
   const css=document.createElement('style');
-  css.textContent=`.closed-test-bar{font:700 12px/1.3 Inter,Arial,sans-serif;letter-spacing:.02em;padding:9px 16px;text-align:center;background:#0b1220;color:#dbeafe;position:relative;z-index:50}.closed-test-bar b{color:#fff}.test-choice{margin-top:18px;padding:22px;border:1px solid rgba(100,116,139,.28);border-radius:16px;background:rgba(255,255,255,.07)}.test-choice h4{margin:0 0 7px;font-size:18px}.test-choice p{margin:0 0 14px;opacity:.84}.test-buttons{display:flex;gap:10px;flex-wrap:wrap}.test-buttons a{display:inline-block;text-decoration:none;padding:12px 15px;border-radius:10px;font-weight:800;background:#fff;color:#101827;border:1px solid rgba(15,23,42,.15)}.test-buttons a.primary-test{background:#2563eb;color:#fff;border-color:#2563eb}.test-note{font-size:12px;margin-top:11px;opacity:.72}.tradie-outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0 6px;max-width:690px}.tradie-outcome{display:flex;align-items:flex-start;gap:10px;padding:13px 14px;background:#fff;border:1px solid #d7e4eb;border-radius:12px;box-shadow:0 6px 18px rgba(18,61,88,.05);color:#18384e;font-weight:800;line-height:1.25}.tradie-outcome:before{content:'✓';display:grid;place-items:center;flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:#e3f3f9;color:#0876a8;font-size:13px;font-weight:950}@media(max-width:680px){.tradie-outcomes{grid-template-columns:1fr}}`;
+  css.textContent=`.closed-test-bar{font:700 12px/1.3 Inter,Arial,sans-serif;letter-spacing:.02em;padding:9px 16px;text-align:center;background:#0b1220;color:#dbeafe;position:relative;z-index:50}.closed-test-bar b{color:#fff}.test-choice{margin-top:18px;padding:22px;border:1px solid rgba(100,116,139,.28);border-radius:16px;background:rgba(255,255,255,.07)}.test-choice h4{margin:0 0 7px;font-size:18px}.test-choice p{margin:0 0 14px;opacity:.84}.test-buttons{display:flex;gap:10px;flex-wrap:wrap}.test-buttons a{display:inline-block;text-decoration:none;padding:12px 15px;border-radius:10px;font-weight:800;background:#fff;color:#101827;border:1px solid rgba(15,23,42,.15)}.test-buttons a.primary-test{background:#2563eb;color:#fff;border-color:#2563eb}.test-note{font-size:12px;margin-top:11px;opacity:.72}.tradie-outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0 16px;max-width:690px}.tradie-outcome{display:flex;align-items:flex-start;gap:10px;padding:13px 14px;background:#fff;border:1px solid #d7e4eb;border-radius:12px;box-shadow:0 6px 18px rgba(18,61,88,.05);color:#18384e;font-weight:800;line-height:1.25}.tradie-outcome:before{content:'✓';display:grid;place-items:center;flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:#e3f3f9;color:#0876a8;font-size:13px;font-weight:950}@media(max-width:680px){.tradie-outcomes{grid-template-columns:1fr}}`;
   document.head.appendChild(css);
 
   if(styleId==='4'){
     const headline=document.getElementById('headline');
     const sub=document.getElementById('sub');
-    if(headline){headline.textContent='Find the AI tool or workflow that can help you:';}
+    if(headline){headline.textContent='Find the AI tool that can help you:';}
     if(sub){
       sub.textContent='A 3-minute business check for busy tradies. Start with what is costing you time, attention or opportunity — then test one practical improvement before adding more software.';
       const outcomes=document.createElement('div');
       outcomes.className='tradie-outcomes';
-      outcomes.innerHTML='<div class="tradie-outcome">Cut the admin that follows you home</div><div class="tradie-outcome">Get you more work</div><div class="tradie-outcome">Remove the noise</div><div class="tradie-outcome">Improve the way your business runs</div>';
-      sub.insertAdjacentElement('afterend',outcomes);
+      outcomes.innerHTML='<div class="tradie-outcome">Cut the admin that follows you home</div><div class="tradie-outcome">Get me more work</div><div class="tradie-outcome">Remove the noise</div><div class="tradie-outcome">Improve my business</div>';
+      sub.insertAdjacentElement('beforebegin',outcomes);
     }
   }
 
