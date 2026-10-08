@@ -1,0 +1,9 @@
+{
+  "name": "ai-opportunity-finder-v3-staging",
+  "version": "3.0.3",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "bun run bootstrap.ts"
+  }
+}
