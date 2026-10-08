@@ -1,14 +1,18 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { createDecipheriv } from "node:crypto";
 
 const keyB64 = Bun.env.AOF_PACK_KEY_B64 || "";
 if (!keyB64) throw new Error("AOF_PACK_KEY_B64 is required");
 
-const parts = [1,2,3,4,5].map(i =>
-  readFileSync(new URL(`./data/part${i}.txt`, import.meta.url), "utf8").trim()
-).join("");
+const parts: string[] = [];
+for (let i = 1; i <= 20; i++) {
+  const url = new URL(`./data/part${i}.txt`, import.meta.url);
+  if (!existsSync(url)) break;
+  parts.push(readFileSync(url, "utf8").trim());
+}
+if (!parts.length) throw new Error("No encrypted V3 payload parts found");
 
-const blob = Buffer.from(parts, "base64");
+const blob = Buffer.from(parts.join(""), "base64");
 const nonce = blob.subarray(0, 12);
 const tag = blob.subarray(blob.length - 16);
 const ciphertext = blob.subarray(12, blob.length - 16);
