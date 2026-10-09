@@ -24,12 +24,32 @@
   if(tester)carry.set('tester',tester); if(reply)carry.set('reply',reply);
 
   const css=document.createElement('style');
-  css.textContent=`.closed-test-bar{font:700 12px/1.3 Inter,Arial,sans-serif;letter-spacing:.02em;padding:9px 16px;text-align:center;background:#0b1220;color:#dbeafe;position:relative;z-index:50}.closed-test-bar b{color:#fff}.test-choice{margin-top:18px;padding:22px;border:1px solid rgba(100,116,139,.28);border-radius:16px;background:rgba(255,255,255,.07)}.test-choice h4{margin:0 0 7px;font-size:18px}.test-choice p{margin:0 0 14px;opacity:.84}.test-buttons{display:flex;gap:10px;flex-wrap:wrap}.test-buttons a,.test-buttons button{display:inline-block;text-decoration:none;padding:12px 15px;border-radius:10px;font-weight:800;background:#fff;color:#101827;border:1px solid rgba(15,23,42,.15);cursor:pointer}.test-buttons .primary-test{background:#2563eb;color:#fff;border-color:#2563eb}.test-buttons button:disabled{opacity:.55;cursor:wait}.test-note{font-size:12px;margin-top:11px;opacity:.72}.test-status{font-size:13px;margin-top:12px}.tradie-outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0 16px;max-width:690px}.tradie-outcome{display:flex;align-items:flex-start;gap:10px;padding:13px 14px;background:#fff;border:1px solid #d7e4eb;border-radius:12px;box-shadow:0 6px 18px rgba(18,61,88,.05);color:#18384e;font-weight:800;line-height:1.25}.tradie-outcome:before{content:'✓';display:grid;place-items:center;flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:#e3f3f9;color:#0876a8;font-size:13px;font-weight:950}@media(max-width:680px){.tradie-outcomes{grid-template-columns:1fr}}`;
+  css.textContent=`.closed-test-bar{font:700 12px/1.3 Inter,Arial,sans-serif;letter-spacing:.02em;padding:9px 16px;text-align:center;background:#0b1220;color:#dbeafe;position:relative;z-index:50}.closed-test-bar b{color:#fff}.test-choice{margin-top:18px;padding:22px;border:1px solid rgba(100,116,139,.28);border-radius:16px;background:rgba(255,255,255,.07)}.test-choice h4{margin:0 0 7px;font-size:18px}.test-choice p{margin:0 0 14px;opacity:.84}.test-buttons{display:flex;gap:10px;flex-wrap:wrap}.test-buttons a,.test-buttons button{display:inline-block;text-decoration:none;padding:12px 15px;border-radius:10px;font-weight:800;background:#fff;color:#101827;border:1px solid rgba(15,23,42,.15);cursor:pointer}.test-buttons .primary-test{background:#2563eb;color:#fff;border-color:#2563eb}.test-buttons button:disabled{opacity:.55;cursor:wait}.test-note{font-size:12px;margin-top:11px;opacity:.72}.test-status{font-size:13px;margin-top:12px}.tradie-outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0 16px;max-width:690px}.tradie-outcome{display:flex;align-items:flex-start;gap:10px;padding:13px 14px;background:#fff;border:1px solid #d7e4eb;border-radius:12px;box-shadow:0 6px 18px rgba(18,61,88,.05);color:#18384e;font-weight:800;line-height:1.25}.tradie-outcome:before{content:'✓';display:grid;place-items:center;flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:#e3f3f9;color:#0876a8;font-size:13px;font-weight:950}.free-first-note{margin:10px 0 0;font-size:12px;line-height:1.4;font-weight:750;opacity:.72}.free-first-note strong{font-weight:900}.free-first-note:before{content:'✓';display:inline-grid;place-items:center;width:18px;height:18px;margin-right:7px;border-radius:50%;font-size:11px;vertical-align:-2px}body[data-style='1'] .free-first-note:before{background:#dde5d7;color:#52664f}body[data-style='2'] .free-first-note:before{background:#e5f0ff;color:#1769e0}body[data-style='3'] .free-first-note:before{background:#e8ff99;color:#29204c}body[data-style='4'] .free-first-note:before{background:#e3f3f9;color:#0876a8}body[data-style='1'] .hero h1{font-size:clamp(44px,5.35vw,72px)!important;line-height:.98!important;letter-spacing:-.045em!important;max-width:700px}body[data-style='1'] .hero h1 .hero-soft{font-style:italic;color:#4d584b}body[data-style='1'] .strip{gap:0!important;align-items:center}body[data-style='1'] .strip span{background:transparent!important;border:0!important;border-radius:0!important;padding:2px 15px 2px 0!important;margin-right:14px;position:relative;color:#62675d;font-weight:750!important}body[data-style='1'] .strip span:not(:last-child):after{content:'·';position:absolute;right:-1px;top:0;color:#9b988e;font-weight:900}body[data-style='1'] .strip span:last-child{margin-right:0}body[data-style='1'] .hero-cta{background:#22251f!important;color:#f7f3eb!important;border-color:#22251f!important} @media(max-width:680px){.tradie-outcomes{grid-template-columns:1fr}body[data-style='1'] .hero{padding-top:34px!important}body[data-style='1'] .hero h1{font-size:clamp(40px,11.5vw,54px)!important;line-height:1!important;letter-spacing:-.04em!important;margin-top:9px!important}body[data-style='1'] .hero p{font-size:17px!important;line-height:1.42}body[data-style='1'] .strip{padding-top:2px!important;padding-bottom:42px!important;row-gap:8px!important}body[data-style='1'] .strip span{font-size:11px!important;padding-right:11px!important;margin-right:10px!important}.free-first-note{font-size:12px}}`;
   document.head.appendChild(css);
 
+  const heroCta=document.getElementById('heroCta');
+  const headline=document.getElementById('headline');
+  const sub=document.getElementById('sub');
+
+  const freeCtas={
+    '1':'TAKE THE FREE SURVEY →',
+    '2':'Run my free 3-minute check',
+    '3':'Find my free quick win →',
+    '4':'Get my free first AI win →'
+  };
+  if(heroCta){
+    heroCta.textContent=freeCtas[styleId];
+    const note=document.createElement('p');
+    note.className='free-first-note';
+    note.innerHTML='<strong>Free survey + free first result.</strong> No payment or login required.';
+    heroCta.insertAdjacentElement('afterend',note);
+  }
+
+  if(styleId==='1' && headline){
+    headline.innerHTML='One good place<br>to start with AI<br><span class="hero-soft">and your business.</span>';
+  }
+
   if(styleId==='4'){
-    const headline=document.getElementById('headline');
-    const sub=document.getElementById('sub');
     if(headline){headline.textContent='Find the AI tool that can help you:';}
     if(sub){
       sub.textContent='A 3-minute business check for busy tradies. Start with what is costing you time, attention or opportunity — then test one practical improvement before adding more software.';
