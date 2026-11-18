@@ -109,15 +109,15 @@
     const backend=(cfg.backend_url||'').trim();
     if(backend){
       if(old)old.style.display='none';
-      box.innerHTML='<h4>For this test, what would you genuinely do next?</h4><p>No payment will be taken. Your selected path and final five-question feedback will be recorded automatically for this closed test.</p><div class="test-buttons"><button id="freePath">I’d stay with the free result</button><button id="paidPath" class="primary-test">I’d consider the A$39 personalised kit</button></div><div class="test-note">If you choose the paid path, you’ll see the V2 pack generated from your own assessment, then continue directly to the feedback survey.</div><div class="test-status" id="testStatus"></div>';
+      box.innerHTML='<h4>For this test, what would you genuinely do next?</h4><p>No payment will be taken. Your selected path and final five-question feedback will be recorded automatically for this closed test.</p><div class="test-buttons"><button id="freePath">I’d stay with the free result</button><button id="paidPath" class="primary-test">I’d consider the A$39 guided Quick-Start Pack</button></div><div class="test-note">The paid-intent test route currently displays the legacy V2 pack, not V3.1. V3.1 fulfilment must be integrated and QA-tested before external traffic.</div><div class="test-status" id="testStatus"></div>';
       const freeBtn=box.querySelector('#freePath'),paidBtn=box.querySelector('#paidPath'),status=box.querySelector('#testStatus'),buttons=[freeBtn,paidBtn];
       freeBtn.addEventListener('click',()=>createPrivateSession(backend,'free',status,buttons));
       paidBtn.addEventListener('click',()=>createPrivateSession(backend,'paid-preview',status,buttons));
     }else{
-      if(old){old.textContent='Preview the A$39 V2 kit';old.target='_blank';old.rel='noopener';old.href='kit.html?'+carry.toString()+'&choice=paid-preview';}
+      if(old){old.textContent='Preview V3.1 pack concept';old.target='_blank';old.rel='noopener';old.href='v3-1-paid-pack-review.html';}
       const freeQ=new URLSearchParams(carry);freeQ.set('choice','free');
       const paidQ=new URLSearchParams(carry);paidQ.set('choice','paid');
-      box.innerHTML=`<h4>For this review, what would you do next?</h4><p>No payment will be taken. This founder-review mode uses the static V2 example until private fulfilment is activated.</p><div class="test-buttons"><a href="feedback.html?${freeQ.toString()}">I’d stay with the free result</a><a class="primary-test" target="_blank" rel="noopener" href="kit.html?${carry.toString()}&choice=paid-preview">I’d consider the A$39 kit</a><a href="feedback.html?${paidQ.toString()}">I’ve viewed the kit — give feedback</a></div><div class="test-note">Founder-review feedback still uses the email/copy fallback. Wider external testing should wait until private fulfilment and stored feedback are activated.</div>`;
+      box.innerHTML=`<h4>For this review, what would you do next?</h4><p>No payment will be taken. This is a founder-only concept preview. The V3.1 personalised fulfilment path is not yet activated.</p><div class="test-buttons"><a href="feedback.html?${freeQ.toString()}">I’d stay with the free result</a><a class="primary-test" target="_blank" rel="noopener" href="v3-1-paid-pack-review.html">I’d consider the A$39 guided pack</a><a href="feedback.html?${paidQ.toString()}">I’ve viewed the kit — give feedback</a></div><div class="test-note">Founder-review feedback still uses the email/copy fallback. Wider external testing should wait until private fulfilment and stored feedback are activated.</div>`;
     }
   });
 })();
